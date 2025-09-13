@@ -2,13 +2,13 @@
 
 This is a **demo AI-based Fake News Detector** built with Python, Streamlit, and Hugging Face Transformers.
 
-> **Note:** This project is a prototype for demonstration purpose. The AI predicts based on **text style**
+**Note:** This project is a prototype for demonstration purpose. The AI predicts based on **text style**.
 
 ---
 
 ## Features
 
-- Paste a news headline or article and get an AI prediction
+- Paste a news headline or article and get an AI prediction.
 - Displays **prediction label** and **confidence percentage**.
 - Optional **detailed model output** for detailed breakdowns.
 - Uses **zero-shot classification** with a pre-trained Hugging Face Model.
@@ -29,7 +29,6 @@ This is a **demo AI-based Fake News Detector** built with Python, Streamlit, and
 1. Clone the repository:
 
 > git clone https://github.com/RushilYadav/Fake-News-Detector.git
-> cd Fake-News-Detector
 
 2. Create a virtual environment:
 
@@ -41,7 +40,6 @@ This is a **demo AI-based Fake News Detector** built with Python, Streamlit, and
 
 4. Install dependencies:
 
-Run:
 > pip install -r requirements.txt
 
 ## How to use the app
