@@ -11,8 +11,11 @@ st.markdown(
 
 user_input = st.text_area("Enter news article here:", height=200)
 
-#Load zero-shot-classification model
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli", device=-1)
+#Load zer-shot classification model
+def load_model():
+    return pipeline("zero-shot-classification", model="facebook/bart-large-mnli", device=-1)
+
+classifier = load_model()
 
 if st.button("Predict"):
     if not user_input.strip():
@@ -21,10 +24,11 @@ if st.button("Predict"):
         labels = ["Real", "Fake"]
         result = classifier(user_input, candidate_labels=labels)
 
-        top_label = result['labels'][0]
-        top_score = result['scores'][0]
+        label = result['labels'][0]
+        score = result['scores'][0] * 100
 
-        st.subheader(f"Prediction: {top_label}")
-        st.write(f"Confidence: {top_score:.2f}")
-        st.markdown("**Model output: **")
-        st.json(result)
+        st.subheader(f"Prediction: {label}")
+        st.write(f"Confidence: {score:.2f}%")
+        
+        with st.expander("Show detailed model output"):
+            st.json(result)
