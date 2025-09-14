@@ -28,25 +28,25 @@ This is a **demo AI-based Fake News Detector** built with Python, Streamlit, and
 
 1. Clone the repository:
 
-> git clone https://github.com/RushilYadav/Fake-News-Detector.git
+> `git clone https://github.com/RushilYadav/Fake-News-Detector.git`
 
 2. Create a virtual environment:
 
-> python -m venv .venv
+> `python -m venv .venv`
 
 3. Activate the virtual environment (cmd):
 
-> .venv\Scripts\activate.bat
+> `.venv\Scripts\activate.bat`
 
 4. Install dependencies:
 
-> pip install -r requirements.txt
+> `pip install -r requirements.txt`
 
 ## How to use the app
 
 1. Run the app:
 
-> streamlit run app.py
+> `streamlit run app.py`
 
 2. Open the window and paste a news headline or article in the text area.
 
@@ -55,5 +55,5 @@ This is a **demo AI-based Fake News Detector** built with Python, Streamlit, and
 ## Future Improvements
 
 - Add more labels to improve predictions
-- Integrate real face-checking APIs to cross-reference news.
+- Integrate real fact-checking APIs to cross-reference news.
 - Fine-tune the model for better accuracy
