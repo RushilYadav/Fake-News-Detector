@@ -1,12 +1,42 @@
-#manual testing
+import os
+from dotenv import load_dotenv
+import requests
+
+#Load environment variables from .env file
+load_dotenv()
+GOOGLE_FACT_CHECK_API_KEY = os.getenv("GOOGLE_FACT_CHECK_API_KEY")
 
 def get_evidence_for_claim(claim):
     """
-    Returns a list of evidence snippets for a claim.
-    For now, we can return a hardcoded example.
+    Google Fact Check API to get evidence for a given claim.
+    Returns a list of evidence strings.
+    Filters out irrelevant snippets based on keywords from the claim.
     """
-    sample_evidence = {
-        "NASA announced a mission to Europa": 
-        "NASA has confirmed plans to send a robotic mission to explore Europa in 2026."
-    }
-    return [sample_evidence.get(claim, "No evidence available.")]
+
+    #construct API request URL
+    url = f"https://factchecktools.googleapis.com/v1alpha1/claims:search?query={claim}&key={GOOGLE_FACT_CHECK_API_KEY}"
+
+    response = requests.get(url)
+
+    #parse JSON response
+    data = response.json()
+
+    evidence_list = []
+
+    #extract relevant evidence from response
+    for item in data.get("claims", []):
+        text = item.get("text", "")
+        reviews = item.get("claimReview", [])
+        if reviews:
+            publisher = reviews[0].get("publisher", {}).get("name", "")
+            snippet = f"{text} (Source: {publisher})"
+
+            keywords = [word for word in claim.split() if len(word) > 3]
+            if any(keyword.lower() in snippet.lower() for keyword in keywords):
+                evidence_list.append(snippet)
+    
+    #if no evidence found, return a default message
+    if not evidence_list:
+        evidence_list.append("No relevant evidence found.")
+
+    return evidence_list
